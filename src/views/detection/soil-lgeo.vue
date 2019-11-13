@@ -1,131 +1,116 @@
 <template>
-  <el-container>
-    <el-main>
-      <el-row>
-        <el-card class="my-card">
-          <div slot="header" class="clearfix">
-            <span>土壤地累计指数法</span>
-            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+  <my-content @getInitData="getInitData">
+    <template v-slot:c-title>
+      土壤地累计指数法
+    </template>
+    <template v-slot:c-intro>
+      <p>
+        <strong>简介：</strong> 通过土壤重金属浓度与自然地球化学背景值之间的关系来确定重金属污染程度的一种方法。<br/>
+      </p>
+      <div style="float: left;line-height: 1.8em;">
+        <strong>输入：</strong>
+      </div>
+      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
+        自然地球化学背景值 与 采样点土壤重金属浓度。
+      </div>
+    </template>
+    <div class="map">
+      <el-tabs class="mytabs" type="border-card" style="" v-model="activeName">
+        <el-tab-pane label="地图" name="first">
+          <GisMap style="height: 500px;"
+                  :isMultiple="isMultiple"
+                  :metals="metals"
+                  :points="mapData"
+                  :classes="classes"
+          ></GisMap>
+        </el-tab-pane>
+        <el-tab-pane label="图表" name="second">
+          <div style="text-align: center;">
+            <h2 style="color: #606266">土壤重金属污染物样点超标情况</h2>
+            <el-table class="my-table" :data="outputData" style="margin:auto" stripe>
+              <el-table-column
+                prop="污染物"
+                label="污染物"
+                width="100"
+                align="center">
+              </el-table-column>
+              <el-table-column
+                prop="样点总数"
+                label="样点总数"
+                width="100">
+              </el-table-column>
+              <el-table-column label="无污染">
+                <el-table-column
+                  prop="样点数_0"
+                  label="样点数"
+                  width="100">
+                </el-table-column>
+                <el-table-column
+                  prop="比例_0"
+                  label="比例（%）"
+                  width="100">
+                </el-table-column>
+              </el-table-column>
+              <el-table-column label="轻度污染">
+                <el-table-column
+                  prop="样点数_1"
+                  label="样点数"
+                  width="120">
+                </el-table-column>
+                <el-table-column
+                  prop="比例_1"
+                  label="比例（%）"
+                  width="100">
+                </el-table-column>
+              </el-table-column>
+              <el-table-column label="中度污染">
+                <el-table-column
+                  prop="样点数_2"
+                  label="样点数"
+                  width="100">
+                </el-table-column>
+                <el-table-column
+                  prop="比例_2"
+                  label="比例（%）"
+                  width="100">
+                </el-table-column>
+              </el-table-column>
+              <el-table-column label="重度污染">
+                <el-table-column
+                  prop="样点数_3"
+                  label="样点数"
+                  width="100">
+                </el-table-column>
+                <el-table-column
+                  prop="比例_3"
+                  label="比例（%）"
+                  width="100">
+                </el-table-column>
+              </el-table-column>
+              <el-table-column label="极重度污染">
+                <el-table-column
+                  prop="样点数_4"
+                  label="样点数"
+                  width="100">
+                </el-table-column>
+                <el-table-column
+                  prop="比例_4"
+                  label="比例（%）"
+                  width="100">
+                </el-table-column>
+              </el-table-column>
+            </el-table>
           </div>
-          <div style="margin-bottom: 10px;">
-            <p>
-              <strong>简介：</strong> 通过土壤重金属浓度与自然地球化学背景值之间的关系来确定重金属污染程度的一种方法。<br/>
-            </p>
-            <div style="float: left;line-height: 1.8em;">
-              <strong>输入：</strong>
-            </div>
-            <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
-              自然地球化学背景值 与 采样点土壤重金属浓度。
-            </div>
-          </div>
-        </el-card>
-      </el-row>
-      <el-row>
-        <el-card class="my-card" id="upload-card">
-          <upload-excel @getInitData="getInitData"></upload-excel>
-        </el-card>
-      </el-row>
-      <el-row>
-        <div class="map">
-          <el-tabs class="mytabs" type="border-card" style="" v-model="activeName">
-            <el-tab-pane label="地图" name="first">
-              <GisMap style="height: 500px;"
-                      :isMultiple="isMultiple"
-                      :metals="metals"
-                      :points="mapData"
-                      :classes="classes"
-              ></GisMap>
-            </el-tab-pane>
-            <el-tab-pane label="图表" name="second">
-              <div style="text-align: center;">
-                <h2 style="color: #606266">土壤重金属污染物样点超标情况</h2>
-                <el-table class="my-table" :data="outputData" style="margin:auto" stripe>
-                  <el-table-column
-                    prop="污染物"
-                    label="污染物"
-                    width="100"
-                    align="center">
-                  </el-table-column>
-                  <el-table-column
-                    prop="样点总数"
-                    label="样点总数"
-                    width="100">
-                  </el-table-column>
-                  <el-table-column label="无污染">
-                    <el-table-column
-                      prop="样点数_0"
-                      label="样点数"
-                      width="100">
-                    </el-table-column>
-                    <el-table-column
-                      prop="比例_0"
-                      label="比例（%）"
-                      width="100">
-                    </el-table-column>
-                  </el-table-column>
-                  <el-table-column label="轻度污染">
-                    <el-table-column
-                      prop="样点数_1"
-                      label="样点数"
-                      width="120">
-                    </el-table-column>
-                    <el-table-column
-                      prop="比例_1"
-                      label="比例（%）"
-                      width="100">
-                    </el-table-column>
-                  </el-table-column>
-                  <el-table-column label="中度污染">
-                    <el-table-column
-                      prop="样点数_2"
-                      label="样点数"
-                      width="100">
-                    </el-table-column>
-                    <el-table-column
-                      prop="比例_2"
-                      label="比例（%）"
-                      width="100">
-                    </el-table-column>
-                  </el-table-column>
-                  <el-table-column label="重度污染">
-                    <el-table-column
-                      prop="样点数_3"
-                      label="样点数"
-                      width="100">
-                    </el-table-column>
-                    <el-table-column
-                      prop="比例_3"
-                      label="比例（%）"
-                      width="100">
-                    </el-table-column>
-                  </el-table-column>
-                  <el-table-column label="极重度污染">
-                    <el-table-column
-                      prop="样点数_4"
-                      label="样点数"
-                      width="100">
-                    </el-table-column>
-                    <el-table-column
-                      prop="比例_4"
-                      label="比例（%）"
-                      width="100">
-                    </el-table-column>
-                  </el-table-column>
-                </el-table>
-              </div>
-            </el-tab-pane>
-          </el-tabs>
-        </div>
-      </el-row>
-
-    </el-main>
-  </el-container>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+  </my-content>
 </template>
 
 <script>
 const backgroundData = {Cd: 0.09, Pb: 20.60, Cu: 19.88, Zn: 66.87, Cr: 63.69, Ni: 26.69, As: 8.39, Hg: 0.04}
 const ch_en = {Cd: '镉', Ni: '镍', Cu: '铜', Zn: '锌', As: '砷', Cr: '铬', Hg: '汞', Pb: '铅'}
-import UploadExcel from './components/upload-excel.vue'
+import MyContent from '@/layout/content.vue'
 import GisMap from '@/components/GisMap/index.vue'
 
 export default {
@@ -144,7 +129,7 @@ export default {
         }
     },
     components: {
-        UploadExcel,
+        MyContent,
         GisMap,
     },
     methods: {
