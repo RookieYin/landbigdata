@@ -8,7 +8,7 @@
       </el-row>
     </div>
     <el-row>
-      <el-table :data="filteredData" height="300" border style="width: 100%">
+      <el-table :data="filteredData" height="400" border style="width: 100%">
         <el-table-column
           align="center"
           v-for="header in headerData"
@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-      searchText: "",
+      searchText: ""
     };
   }
 };
