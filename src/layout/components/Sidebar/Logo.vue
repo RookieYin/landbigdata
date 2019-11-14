@@ -25,7 +25,8 @@ export default {
   data() {
     return {
       title: 'Land Bigdata',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      // logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      logo: require('./land.png')
     }
   }
 }
@@ -67,8 +68,9 @@ export default {
       color: #fff;
       font-weight: 600;
       line-height: 50px;
-      font-size: 14px;
-      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      font-size: 18px;
+      // font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      font-family: Helvetica, Tahoma, Arial;
       vertical-align: middle;
     }
   }
