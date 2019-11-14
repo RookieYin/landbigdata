@@ -101,6 +101,7 @@
             </el-table>
           </div>
         </el-tab-pane>
+        <el-tab-pane label="详情" name="third"></el-tab-pane>
       </el-tabs>
     </div>
   </my-content>

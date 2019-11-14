@@ -17,7 +17,7 @@
     </template>
 
     <div class="map">
-      <el-tabs class="mytabs" type="border-card" style="" v-model="activeName">
+      <el-tabs class="my-tabs" type="border-card" style="" v-model="activeName">
         <el-tab-pane label="地图" name="first">
           <GisMap style="height: 500px;"
                   :isMultiple="isMultiple"
@@ -104,6 +104,7 @@
             </el-table>
           </div>
         </el-tab-pane>
+        <el-tab-pane label="详情" name="third"></el-tab-pane>
       </el-tabs>
     </div>
   </my-content>
@@ -111,12 +112,8 @@
 </template>
 
 <script>
-    const standard = {
-        Cd: [0.3, 0.3, 0.3, 0.6], Ni: [60, 70, 100, 190], Cu: [50, 50, 100, 100],
-        Zn: [200, 200, 250, 300], As: [40, 40, 30, 25], Cr: [150, 150, 200, 250],
-        Hg: [1.3, 1.8, 2.4, 3.4], Pb: [70, 90, 120, 170]
-    }
-    const ch_en = {Cd: '镉', Ni: '镍', Cu: '铜', Zn: '锌', As: '砷', Cr: '铬', Hg: '汞', Pb: '铅'}
+    const standard = {Cd: 0.15, Ni: 1.0, As: 0.5, Cr: 1.0, Hg: 0.02, Pb: 0.2}
+    const ch_en = {Cd: '镉', Ni: '镍', As: '砷', Cr: '铬', Hg: '汞', Pb: '铅'}
     import MyContent from '@/layout/content.vue'
     import GisMap from '@/components/GisMap/index.vue'
 
@@ -129,7 +126,7 @@
                 computedData: {},
                 outputData: [],
                 mapData: [],
-                metals: ['As', 'Cd', 'Cr', 'Cu', 'Hg', 'Ni', 'Pb', 'Zn'],
+                metals: ['As', 'Cd', 'Cr', 'Ni', 'Pb'],
                 levelIndex: {'安全': 0, '警戒线': 1, '轻度污染': 2, '中度污染': 3, '重度污染': 4},
                 isMultiple: true,
                 classes: [["green", '安全'], ["blue", '警戒线'], ["yellow", '轻度污染'], ["orange", '中度污染'], ["red", '重度污染']]
@@ -143,32 +140,23 @@
             getInitData(data) {
                 console.log(data);
                 this.initData = data;
-                let computedData = {As: [], Cd: [], Cr: [], Cu: [], Hg: [], Ni: [], Pb: [], Zn: []}
+                let computedData = {As: [], Cd: [], Cr: [], Ni: [], Pb: []}
                 for (let item of this.initData.tableData) {
                     for (let metal in computedData) {
                         let temp = {}
-                        for (let i of ['longitude', 'latitude', '省市', '区县', '乡镇', '村', 'pH',]) {
+                        for (let i of ['longitude', 'latitude',]) {
                             temp[i] = item[i]
                         }
                         temp['C'] = item[metal]
-                        temp['S'] = this.getStandardData(item.pH, metal)
+                        temp['S'] = standard[metal]
                         temp['P'] = (temp['C'] / temp['S'])
                         computedData[metal].push(temp)
                     }
                 }
+                console.log(computedData)
                 this.computedData = computedData
                 this.getOutputData(computedData)
                 this.getMapData(computedData)
-            },
-            getStandardData(ph, metal) {
-                if (ph <= 5.5)
-                    return standard[metal][0];
-                else if (ph <= 6.5)
-                    return standard[metal][1];
-                else if (ph <= 7.5)
-                    return standard[metal][2];
-                else
-                    return standard[metal][3];
             },
             getOutputData(computedData) {
                 if (Object.keys(computedData).length === 0) return;
@@ -227,17 +215,12 @@
                             "</td></tr><tr><td>比值：</td><td>" + computedDataMetal['P'].toFixed(2) +
                             "</td></tr><tr><td>经度：</td><td>" + computedDataMetal['longitude'].toFixed(2) +
                             "</td></tr><tr><td>纬度：</td><td>" + computedDataMetal['latitude'].toFixed(2) +
-                            "</td></tr><tr><td>省市</td><td>" + computedDataMetal['省市'] + " " + computedDataMetal['区县'] +
-                            "</td></tr><tr><td>区县</td><td>" + computedDataMetal['乡镇'] + " " + computedDataMetal['村'] +
                             "</td></tr></tbody></table>"
-                        // let div = document.createElement('div')
-                        // div.innerHTML = htmlStr
-                        // div.style.float = 'right'
-                        // document.body.appendChild(div)
                         temp.push([computedDataMetal['longitude'], computedDataMetal['latitude'], this.levelIndex[level], htmlStr])
                     }
                     data.push(temp)
                 }
+                // console.log(data)
                 this.mapData = data
             },
         }
@@ -245,7 +228,7 @@
 </script>
 
 <style scoped>
-  .mytabs /deep/ .el-tabs__item {
+  .my-tabs /deep/ .el-tabs__item {
     width: 200px;
     text-align: center;
   }

@@ -43,7 +43,7 @@ export default {
       if(this.showTable) {
           this.btnText = "隐藏输入"
       }else{
-          this.btnText = "显示表格"
+          this.btnText = "显示输入"
       }
     },
     generateData({ header, results }) {

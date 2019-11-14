@@ -12,7 +12,7 @@
               <br />
               <el-row>
                 <template v-for="(item, index) in classes">
-                  <el-col :span="12" v-bind="index" :key="item[0]">
+                  <el-col :span="12" :key="item[0]">
                     <img
                       :src="require('./marker/'+classes[index][0]+'.png')"
                       width="15px"

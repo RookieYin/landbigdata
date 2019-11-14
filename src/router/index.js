@@ -98,14 +98,14 @@ export const constantRoutes = [
       {
         path: 'risk',
         name: 'Risk',
-        component: () => import('@/views/table/index'),
+        component: () => import('@/views/detection/ecology-damage-evaluation'),
         alwaysShow: true,
         meta: { title: '风险评价' },
         children: [
           {
             path: 'hankson',
             name: 'Hankson',
-            component: () => import('@/views/table/index'),
+            component: () => import('@/views/detection/ecology-damage-evaluation'),
             meta: { title: '潜在生态危害评价' }
           }
         ]
