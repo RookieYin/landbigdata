@@ -122,7 +122,7 @@ export const constantRoutes = [
       {
         path: 'cluster',
         name: 'Cluster',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/cluster/cluster'),
         meta: { title: '聚类溯源' }
       },
       {
