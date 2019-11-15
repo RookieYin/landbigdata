@@ -213,9 +213,7 @@ export default {
     }
   },
   mounted() {
-    // todo: for debug
-    window.myvm = this;
-
+    this.metalSelected = this.metals[0];
     if (this.isMultiple) {
       for (let i = 0; i < this.metals.length; ++i) {
         this.metalOptions.push({

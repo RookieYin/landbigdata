@@ -188,7 +188,7 @@ export const constantRoutes = [
       {
         path: 'partition',
         name: 'Partition',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/prevention/prevention-zone'),
         meta: { title: '防控分区' }
       },
       {
