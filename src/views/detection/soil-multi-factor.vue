@@ -224,7 +224,7 @@ export default {
       if (Object.keys(computedData).length === 0) return;
 
       let headerData = [
-        { prop: "provice", label: "省市", sortable: true }, //
+        { prop: "province", label: "省市", sortable: true }, //
         { prop: "district", label: "区县", sortable: true }, //
         { prop: "longitude", label: "经度" }, //
         { prop: "latitude", label: "纬度" }, //
@@ -248,7 +248,7 @@ export default {
           level = "中度污染";
         } else level = "重度污染";
 
-        tableRow["provice"] =
+        tableRow["province"] =
           computedDataMetal["省市"] + " " + computedDataMetal["区县"];
         tableRow["district"] =
           computedDataMetal["乡镇"] + " " + computedDataMetal["村"];
@@ -265,7 +265,7 @@ export default {
           "</td></tr><tr><td>纬度：</td><td>" +
           tableRow["latitude"] +
           "</td></tr><tr><td>省市</td><td>" +
-          tableRow["provice"] +
+          tableRow["province"] +
           "</td></tr><tr><td>区县</td><td>" +
           tableRow["district"] +
           "</td></tr></tbody></table>";

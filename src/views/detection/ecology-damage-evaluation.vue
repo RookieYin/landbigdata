@@ -92,7 +92,9 @@
             </el-table>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="详情" name="third"></el-tab-pane>
+        <el-tab-pane label="详情" name="third">
+          <search-table :headerData="headerData" :tableData="tableData" />
+        </el-tab-pane>
       </el-tabs>
     </div>
 
@@ -104,6 +106,7 @@
 <script>
     import MyContent from '@/layout/content.vue'
     import GisMap from '@/components/GisMap/index.vue'
+    import SearchTable from '@/components/SearchTable/index.vue'
     let T = {Cd:30, As:10, Cu:5, Pb:5, Cr:2, Zn:1};
     //为了演示效果，更改金属毒性
     for(let item in T){
@@ -123,12 +126,15 @@
                 metals: ['As', 'Cd', 'Cr', 'Cu', 'Pb', 'Zn'],
                 levelIndex: {'轻微': 0, '中等': 1, '强': 2, '很强': 3},
                 isMultiple: true,
-                classes: [["green", '轻微'], ["blue", '中等'], ["yellow", '强'], ["orange", '很强']]
+                classes: [["green", '轻微'], ["blue", '中等'], ["yellow", '强'], ["orange", '很强']],
+                tableData: [],
+                headerData: []
             }
         },
         components: {
             MyContent,
             GisMap,
+            SearchTable,
         },
         methods: {
             getInitData(data) {
@@ -186,7 +192,7 @@
                     RIs.push(computedData['As'][i]['E'] + computedData['Cd'][i]['E'] + computedData['Cu'][i]['E'] +
                         computedData['Pb'][i]['E'] + computedData['Cr'][i]['E'] + computedData['Zn'][i]['E']);
                 }
-                console.log(RIs)
+                // console.log(RIs)
                 let RI = {};
                 RI['污染物'] = 'RI';
                 RI['样点总数'] = computedData['As'].length;
@@ -211,11 +217,23 @@
                 RI['比例_3'] = (count[3] / RI['样点总数'] * 100).toFixed(2);
                 data.push(RI);
                 this.outputData = data;
-                console.log(data);
+                // console.log(data);
             },
             getMapData(computedData) {
                 if (Object.keys(computedData).length === 0) return {};
                 let data = [];
+                let headerData = [
+                    { prop: "province", label: "省市", sortable: true }, //
+                    { prop: "district", label: "区县", sortable: true }, //
+                    { prop: "longitude", label: "经度" }, //
+                    { prop: "latitude", label: "纬度" }, //
+                    { prop: "metal", label: "金属类型", sortable: true }, //
+                    { prop: "val", label: "金属含量", sortable: true },
+                    { prop: "standard", label: "国家标准" }, //
+                    { prop: "e", label: "潜在污染风险", sortable: true }, //
+                    { prop: "level", label: "等级" } //
+                ];
+                let tableData = [];
                 for (let metal of this.metals) {
                     let temp = [];
                     for (let i = 0; i < computedData[metal].length; ++i) {
@@ -229,6 +247,19 @@
                             level = '强';
                         } else
                             level = '很强';
+                        let tableRow = {};
+                        tableRow["metal"] = metal;
+                        tableRow["level"] = level;
+                        tableRow["val"] = computedDataMetal["C_i"].toFixed(2);
+                        tableRow["standard"] = computedDataMetal["C_n"].toFixed(2);
+                        tableRow["e"] = computedDataMetal["E"].toFixed(2);
+                        tableRow["longitude"] = computedDataMetal["longitude"].toFixed(2);
+                        tableRow["latitude"] = computedDataMetal["latitude"].toFixed(2);
+                        tableRow["province"] =
+                            computedDataMetal["省市"] + " " + computedDataMetal["区县"];
+                        tableRow["district"] =
+                            computedDataMetal["乡镇"] + " " + computedDataMetal["村"];
+                        tableData.push(tableRow);
                         let htmlStr = "<table><tbody><tr><td>" + ch_en[metal] + "含量（mg）：</td><td>" + computedDataMetal['C_i'].toFixed(2) +
                             "</td></tr><tr><td>比值：</td><td>" + computedDataMetal['E'].toFixed(2) +
                             "</td></tr><tr><td>经度：</td><td>" + computedDataMetal['longitude'].toFixed(2) +
@@ -241,6 +272,8 @@
                     data.push(temp);
                 }
                 this.mapData = data;
+                this.headerData = headerData;
+                this.tableData = tableData;
             },
         }
     }

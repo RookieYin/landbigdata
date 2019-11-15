@@ -201,7 +201,7 @@ export default {
       if (Object.keys(this.computedData).length === 0) return;
 
       let headerData = [
-        { prop: "provice", label: "省市", sortable: true }, //
+        { prop: "province", label: "省市", sortable: true }, //
         { prop: "district", label: "区县", sortable: true }, //
         { prop: "longitude", label: "经度" }, //
         { prop: "latitude", label: "纬度" }, //
@@ -237,7 +237,7 @@ export default {
           tableRow["p"] = computedDataMetal["I"].toFixed(2);
           tableRow["longitude"] = computedDataMetal["longitude"].toFixed(2);
           tableRow["latitude"] = computedDataMetal["latitude"].toFixed(2);
-          tableRow["provice"] =
+          tableRow["province"] =
             computedDataMetal["省市"] + " " + computedDataMetal["区县"];
           tableRow["district"] =
             computedDataMetal["乡镇"] + " " + computedDataMetal["村"];
@@ -264,10 +264,6 @@ export default {
             " " +
             computedDataMetal["村"] +
             "</td></tr></tbody></table>";
-          // let div = document.createElement('div')
-          // div.innerHTML = htmlStr
-          // div.style.float = 'right'
-          // document.body.appendChild(div)
           temp.push([
             computedDataMetal["longitude"],
             computedDataMetal["latitude"],

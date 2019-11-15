@@ -157,8 +157,8 @@ export default {
       if (Object.keys(computedData).length === 0) return {};
 
       let headerData = [
-        { prop: "provice", label: "省市", sortable: true }, //
-        { prop: "district", label: "区县", sortable: true }, //
+        // { prop: "province", label: "省市", sortable: true }, //
+        // { prop: "district", label: "区县", sortable: true }, //
         { prop: "longitude", label: "经度" }, //
         { prop: "latitude", label: "纬度" }, //
         { prop: "metal", label: "金属类型", sortable: true }, //
@@ -174,6 +174,7 @@ export default {
         let temp = [];
         for (let i = 0; i < computedData[metal].length; ++i) {
           let level = "";
+          let tableRow = {};
           let computedDataMetal = computedData[metal][i];
           if (computedDataMetal["P"] <= 0.7) {
             level = "安全";
@@ -184,6 +185,18 @@ export default {
           } else if (computedDataMetal["P"] <= 3) {
             level = "中度污染";
           } else level = "重度污染";
+          tableRow["metal"] = metal;
+          tableRow["level"] = level;
+          tableRow["val"] = computedDataMetal["C"].toFixed(2);
+          tableRow["standard"] = computedDataMetal["S"].toFixed(2);
+          tableRow["p"] = computedDataMetal["P"].toFixed(2);
+          tableRow["longitude"] = computedDataMetal["longitude"].toFixed(2);
+          tableRow["latitude"] = computedDataMetal["latitude"].toFixed(2);
+          // tableRow["province"] =
+          //     computedDataMetal["省市"] + " " + computedDataMetal["区县"];
+          // tableRow["district"] =
+          //     computedDataMetal["乡镇"] + " " + computedDataMetal["村"];
+          tableData.push(tableRow);
           let htmlStr =
             "<table><tbody><tr><td>" +
             ch_en[metal] +
@@ -209,6 +222,8 @@ export default {
       }
       // console.log(data)
       this.mapData = data;
+      this.headerData = headerData;
+      this.tableData = tableData;
     }
   }
 };
