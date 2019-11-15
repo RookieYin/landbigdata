@@ -195,6 +195,8 @@ export default {
       this.outputData = data;
     },
     getMapData(computedData) {
+      if (Object.keys(computedData).length === 0) return {};
+
       let headerData = [
         { prop: "provice", label: "省市", sortable: true }, //
         { prop: "district", label: "区县", sortable: true }, //
@@ -208,7 +210,6 @@ export default {
       ];
       let tableData = [];
 
-      if (Object.keys(computedData).length === 0) return {};
       let data = [];
       for (let metal of this.metals) {
         let temp = [];
@@ -225,6 +226,7 @@ export default {
           } else if (computedDataMetal["P"] <= 3) {
             level = "中度污染";
           } else level = "重度污染";
+
           tableRow["metal"] = metal;
           tableRow["level"] = level;
           tableRow["val"] = computedDataMetal["C"].toFixed(2);
