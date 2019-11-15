@@ -24,7 +24,6 @@ export default {
           label: "时间",
           sortable: true,
           searchable: false,
-          filterable: true
         },
         {
           prop: "name",
