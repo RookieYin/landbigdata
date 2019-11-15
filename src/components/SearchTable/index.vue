@@ -6,7 +6,7 @@
           <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="inputText"></el-input>
         </el-col>
         <el-col :span="3">
-          <el-button icon="el-icon-search" @click="searchText = inputText"></el-button>
+          <el-button icon="el-icon-search" @click="()=>{this.searchText = inputText; this.currentPage = 1;}"></el-button>
         </el-col>
         <el-col :span="5" :offset="10" style="padding: 10px;font-size: 15px;color:#909399">
           <strong>当前搜索:</strong>
@@ -32,10 +32,12 @@
     <el-row>
       <el-pagination
         background
-        layout="prev, pager, next"
+        layout="total, ->, prev, pager, next, jumper"
         :page-size="pageSize"
         :total="total"
-        @current-change="currentPageChange">
+        :current-page="currentPage"
+        @current-change="currentPageChange"
+        style="margin-top:10px;">
       </el-pagination>
     </el-row>
   </div>
@@ -60,7 +62,6 @@
                     return false;
                 });
                 this.total = data.length;
-                this.currentPage = 1;
                 return data;
             }
         },
