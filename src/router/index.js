@@ -194,7 +194,7 @@ export const constantRoutes = [
       {
         path: 'monitor',
         name: 'Monitor',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/prevention/prevention-monitor'),
         meta: { title: '防控监测' }
       }
     ]
