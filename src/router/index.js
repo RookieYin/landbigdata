@@ -161,7 +161,7 @@ export const constantRoutes = [
       {
         path: 'multiplerelate',
         name: 'Multiplerelate',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/binary/multi-regression'),
         meta: { title: '多元回归分析' }
       },
       {
