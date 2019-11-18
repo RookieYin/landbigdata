@@ -76,15 +76,19 @@
         }
         console.log(weights);
         for(let i = 0; i < metal.length; i++){
-          let temp = '$$Y_{'+metal[i]+'}={';
+          let temp = '';
           for(let j = 0; j < weights[i].length; ++j){
+            if(weights[i][j] < 0.1 && weights[i][j] > -0.1)
+              continue;
             if(weights[i][j] < 0 || j === 0)
               temp += weights[i][j].toFixed(4) + 'X_{'+metal[i]+'}';
             else
               temp += '+'+ weights[i][j].toFixed(4) + 'X_{'+metal[i]+'}';
           }
           console.log(temp);
-          this.formulas.push(temp+'}.$$');
+          if(temp[0] === '+')
+            temp = temp.slice(1);
+          this.formulas.push('$$Y_{'+metal[i]+'}={' + temp+'}.$$');
         }
       },
     }

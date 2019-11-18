@@ -155,7 +155,7 @@ export const constantRoutes = [
       {
         path: 'singlerelate',
         name: 'Singlerelate',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/binary/Singlerelate'),
         meta: { title: '土壤作物相关分析' }
       },
       {
