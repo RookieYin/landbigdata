@@ -3,7 +3,7 @@
     <div style="margin-bottom:10px;">
       <el-row :gutter="10">
         <el-col :span="6">
-          <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="inputText"></el-input>
+          <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="inputText" clearable></el-input>
         </el-col>
         <el-col :span="3">
           <el-button

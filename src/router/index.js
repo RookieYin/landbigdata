@@ -149,7 +149,7 @@ export const constantRoutes = [
       {
         path: 'enrichment',
         name: 'Enrichment',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/binary/gather'),
         meta: { title: '作物富集分析' }
       },
       {
