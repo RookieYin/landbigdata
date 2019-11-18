@@ -182,7 +182,7 @@ export const constantRoutes = [
       {
         path: 'knowledge',
         name: 'Knowledge',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/prevention/knowledge-base'),
         meta: { title: '防控知识库' }
       },
       {
