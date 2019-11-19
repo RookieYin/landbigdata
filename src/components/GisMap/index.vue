@@ -71,13 +71,12 @@ import "leaflet/dist/leaflet.css";
 // import yellow from "@/assets/marker/yellow.png";
 // import orange from "@/assets/marker/orange.png";
 // import red from "@/assets/marker/red.png";
-// import {HeatmapOverlay} from 'leaflet-heatmap';
+import HeatmapOverlay from "leaflet-heatmap";
 
 export default {
   name: "GisMap",
   data() {
     return {
-      currentMapPointData: [],
       ourMap: {},
       ourDM: {},
       icons: [
@@ -127,7 +126,10 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      heatmapLayer: undefined,
+      heatmapData: [],
+      heatmapMax: -999
     };
   },
   props: {
@@ -165,6 +167,26 @@ export default {
         opacity: 0.8
       });
       this.ourDM.addTo(this.ourMap);
+
+      this.heatmapLayer = new HeatmapOverlay({
+        // "radius": 0.04,          //设置每一个热力点的半径
+        radius: 0.02, //设置每一个热力点的半径
+        // "maxOpacity": 0.8,           //设置最大的不透明度
+        maxOpacity: 0.6, //设置最大的不透明度
+        // "minOpacity": 0.3,           //设置最小的不透明度
+        scaleRadius: true, //设置热力点是否平滑过渡
+        blur: 0.95, //系数越高，渐变越平滑，默认是0.85,
+        //滤镜系数将应用于所有热点数据。
+        useLocalExtrema: true, //使用局部极值
+        latField: "lng", //纬度
+        lngField: "lat", //经度
+        valueField: "value", //热力点的值
+        gradient: {
+          ".5": "green",
+          ".8": "yellow",
+          ".95": "red"
+        }
+      });
     },
     makepoint(metal_id) {
       let arrs;
@@ -185,6 +207,12 @@ export default {
         })
           .addTo(this.ourMap)
           .bindPopup(arr[3]);
+
+        this.heatmapData.push({
+          lat: arr[0],
+          lng: arr[1],
+          value: arr[2]
+        });
       }
     },
     onchangemetal(val) {
@@ -203,7 +231,17 @@ export default {
       this.ourMap.setView([39.4, 117], 10);
     },
     showHeatMap() {
-      alert("heatMap!");
+      // alert("heatMap!");
+      if (this.ourMap.hasLayer(this.heatmapLayer)) {
+        this.ourMap.removeLayer(this.heatmapLayer);
+      } else {
+        this.ourMap.addLayer(this.heatmapLayer);
+        this.ourDM.bringToBack();
+        this.heatmapLayer.setData({
+          max: this.classes.length - 1,
+          data: this.heatmapData
+        });
+      }
     },
     LayerSelectedChange() {
       let selectedLayers = this.$refs.layerTree
@@ -244,7 +282,7 @@ export default {
 
   opacity: 0.8;
 }
-.tuli /deep/ .el-col{
+.tuli /deep/ .el-col {
   /*background-color: #b8b8b8;*/
   /*color: #ffffff;*/
   line-height: 30px;
