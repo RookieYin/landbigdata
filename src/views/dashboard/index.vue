@@ -57,13 +57,15 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-card class="box-card" v-for="cls in navData" v-bind:key="cls.name">
+      <el-card class="box-card" v-for="cls in navData" v-bind:key="cls.name" style="margin-bottom: 10px;">
         <div slot="header" class="clearfix">
           <span style="text-align: center;">{{cls.name}}</span>
         </div>
-        <el-col :xs="6" :sm="6" :lg="3" class="card-panel-col">
-          <el-card>a</el-card>
+        <el-row :gutter="40">
+        <el-col :xs="12" :sm="12" :lg="6" v-for="child in cls.children" style="margin-bottom: 10px;">
+          <el-card class="item-card" style="" @click.native="handleClick(child.url)">{{ child.name }}</el-card>
         </el-col>
+        </el-row>
       </el-card>
     </el-row>
   </div>
@@ -81,7 +83,11 @@ export default {
       return this.$router.options.routes;
     }
   },
-  methods: {},
+  methods: {
+    handleClick(url){
+      window.location.href = url;
+    }
+  },
   data() {
     return {
       navData: []
@@ -266,4 +272,16 @@ export default {
     }
   }
 }
+  .item-card{
+    text-align: center;
+    /*box-shadow: none;*/
+
+  }
+.item-card:hover{
+    cursor: pointer;
+    /*box-shadow: 0 2px 6px dodgerblue, 0 0 6px rgba(0, 0, 0, .04);*/
+    background-color: dodgerblue;
+    color: #fff;
+    font-weight: bold;
+  }
 </style>
