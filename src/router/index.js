@@ -117,25 +117,25 @@ export const constantRoutes = [
     path: '/trace',
     component: Layout,
     name: 'Trace',
-    meta: { title: '土壤污染溯源', icon: 'search' },
+    meta: { title: '土壤污染分析', icon: 'search' },
     children: [
       {
         path: 'cluster',
         name: 'Cluster',
         component: () => import('@/views/cluster/cluster'),
-        meta: { title: '聚类溯源' }
+        meta: { title: '土壤污染溯源' }
       },
       {
         path: 'decisiontree',
         name: 'Decisiontree',
-        component: () => import('@/views/form/index'),
-        meta: { title: '决策树溯源' }
+        component: () => import('@/views/cluster/decision'),
+        meta: { title: '决策树分析' }
       },
       {
         path: 'randomforest',
         name: 'Randomforest',
-        component: () => import('@/views/form/index'),
-        meta: { title: '随机森林溯源' }
+        component: () => import('@/views/cluster/forest'),
+        meta: { title: '随机森林分析' }
       }
     ]
   },
