@@ -1,13 +1,7 @@
 <template>
   <div class="dashboard-editor-container">
     <el-row>
-      <el-carousel
-        trigger="click"
-        height="300px"
-        indicator-position="outside"
-        type="card"
-        style="background-color: #203146"
-      >
+      <el-carousel trigger="click" height="300px" indicator-position="outside" type="card">
         <el-carousel-item v-for="item in 4" :key="item">
           <img
             style="	width: auto;height: auto;max-width: 100%;max-height: 100%;	"
@@ -62,15 +56,81 @@
         </div>
       </el-col>
     </el-row>
+    <el-row>
+      <el-card class="box-card" v-for="cls in navData" v-bind:key="cls.name">
+        <div slot="header" class="clearfix">
+          <span style="text-align: center;">{{cls.name}}</span>
+        </div>
+        <el-col :xs="6" :sm="6" :lg="3" class="card-panel-col">
+          <el-card>a</el-card>
+        </el-col>
+      </el-card>
+    </el-row>
   </div>
 </template>
 
 <script>
 import CountTo from "vue-count-to";
+import { isExternal } from "@/utils/validate";
+const prefix = window.location.href.slice(0, -window.location.hash.length + 1);
+
 export default {
-  components: { CountTo }
+  components: { CountTo },
+  computed: {
+    routes() {
+      return this.$router.options.routes;
+    }
+  },
+  methods: {},
+  data() {
+    return {
+      navData: []
+    };
+  },
+  mounted() {
+    let vm = this;
+    window.vi = this;
+    let navData = [];
+    vm.routes
+      .filter(e => !e.hidden && e.meta)
+      .forEach(e => {
+        // 对每个大类的route e，进行层次遍历
+
+        const title = e.meta.title;
+        const basePath = e.path + "/";
+        let queue = [];
+        let children = [];
+        e.children.forEach(child => {
+          queue.push({
+            prePath: basePath,
+            node: child
+          });
+        });
+        while (queue.length != 0) {
+          let tmp = queue.shift();
+          if (!tmp.node.children) {
+            children.push({
+              name: tmp.node.meta.title,
+              url: prefix + tmp.prePath + tmp.node.path
+            });
+          } else {
+            tmp.node.children.forEach(child => {
+              queue.push({
+                prePath: tmp.prePath + tmp.node.path + "/",
+                node: child
+              });
+            });
+          }
+        }
+        navData.push({
+          name: title,
+          children
+        });
+      });
+    vm.navData = navData;
+    console.log(navData);
+  }
 };
-</script>
 </script>
 
 <style lang="scss" scoped>
