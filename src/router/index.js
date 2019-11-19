@@ -167,7 +167,7 @@ export const constantRoutes = [
       {
         path: 'comprehensive',
         name: 'Comprehensiveanalysis',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/binary/general-analysis'),
         meta: { title: '综合质量影响指数分析' }
       }
     ]
