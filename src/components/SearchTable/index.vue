@@ -3,13 +3,16 @@
     <div style="margin-bottom:10px;">
       <el-row :gutter="10">
         <el-col :span="6">
-          <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="inputText" clearable></el-input>
+          <el-input
+            placeholder="请输入内容"
+            prefix-icon="el-icon-search"
+            v-model="inputText"
+            clearable
+            @keyup.enter.native="handleSearch"
+          ></el-input>
         </el-col>
         <el-col :span="3">
-          <el-button
-            icon="el-icon-search"
-            @click="()=>{this.searchText = inputText; this.currentPage = 1;}"
-          ></el-button>
+          <el-button icon="el-icon-search" @click="handleSearch"></el-button>
         </el-col>
         <el-col :span="7" :offset="8" style="padding: 10px;font-size: 15px;color:#909399">
           <strong>当前搜索:</strong>
@@ -84,6 +87,10 @@ export default {
   methods: {
     currentPageChange(page) {
       this.currentPage = page;
+    },
+    handleSearch() {
+      this.searchText = this.inputText;
+      this.currentPage = 1;
     }
   }
 };
