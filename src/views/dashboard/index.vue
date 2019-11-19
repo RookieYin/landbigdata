@@ -2,7 +2,7 @@
   <div class="dashboard-editor-container">
     <el-row>
       <el-carousel trigger="click" height="300px" indicator-position="outside" type="card">
-        <el-carousel-item v-for="item in 4" :key="item">
+        <el-carousel-item v-for="item in 5" :key="item">
           <img
             style="	width: auto;height: auto;max-width: 100%;max-height: 100%;	"
             :src="require(`./img/${item-1}.png`)"
@@ -57,14 +57,26 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-card class="box-card" v-for="cls in navData" v-bind:key="cls.name" style="margin-bottom: 10px;">
+      <el-card
+        class="box-card"
+        v-for="cls in navData"
+        v-bind:key="cls.name"
+        style="margin-bottom: 10px;"
+      >
         <div slot="header" class="clearfix">
           <span style="text-align: center;">{{cls.name}}</span>
         </div>
         <el-row :gutter="40">
-        <el-col :xs="12" :sm="12" :lg="6" v-for="child in cls.children" style="margin-bottom: 10px;">
-          <el-card class="item-card" style="" @click.native="handleClick(child.url)">{{ child.name }}</el-card>
-        </el-col>
+          <el-col
+            :xs="12"
+            :sm="12"
+            :lg="6"
+            v-for="child in cls.children"
+            style="margin-bottom: 10px;"
+            v-bind:key="child.url"
+          >
+            <el-card class="item-card" style @click.native="handleClick(child.url)">{{ child.name }}</el-card>
+          </el-col>
         </el-row>
       </el-card>
     </el-row>
@@ -84,7 +96,7 @@ export default {
     }
   },
   methods: {
-    handleClick(url){
+    handleClick(url) {
       window.location.href = url;
     }
   },
@@ -272,16 +284,15 @@ export default {
     }
   }
 }
-  .item-card{
-    text-align: center;
-    /*box-shadow: none;*/
-
-  }
-.item-card:hover{
-    cursor: pointer;
-    /*box-shadow: 0 2px 6px dodgerblue, 0 0 6px rgba(0, 0, 0, .04);*/
-    background-color: dodgerblue;
-    color: #fff;
-    font-weight: bold;
-  }
+.item-card {
+  text-align: center;
+  /*box-shadow: none;*/
+}
+.item-card:hover {
+  cursor: pointer;
+  /*box-shadow: 0 2px 6px dodgerblue, 0 0 6px rgba(0, 0, 0, .04);*/
+  background-color: dodgerblue;
+  color: #fff;
+  font-weight: bold;
+}
 </style>
