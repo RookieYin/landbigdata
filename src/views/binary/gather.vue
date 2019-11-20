@@ -3,15 +3,16 @@
     <template v-slot:c-title>作物富集因子计算</template>
     <template v-slot:c-intro>
       <p>
-        <strong>简介：</strong> 计算每种金属与管控制（环境标准值）的比值。用于划分污染风险和进行环境质量评估。
+        <strong>简介：</strong> 作物重金属污染风险评价方法选用作物污染指数(CPI) ，该方法原理与单因子污染指数方法类似，CPI为农作物样品中元素浓度与国家食品卫生标准中相应元素的国家标准值的比值。
         <br />
       </p>
       <div style="float: left;line-height: 1.8em;">
-        <strong>输入：</strong>
-      </div>
-      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
-        1. 武清区的采样点数据：位置信息、土壤金属含量。
-        <br />2. 武清区的土壤背景值。
+        <p>
+          <strong>输入：</strong>1. 采样点作物数据：包括pH、各种金属含量、经纬度等地理信息。2. 采样点土壤数据：包括pH、各种金属含量、经纬度等地理信息。
+        </p>
+        <p>
+          <strong>输出：</strong>每个采样点作物富集因子和相关信息详情。
+        </p>
       </div>
     </template>
     <div class="map">

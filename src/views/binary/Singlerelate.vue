@@ -1,17 +1,18 @@
 <template>
   <my-content @getInitData="getInitData">
-    <template v-slot:c-title>重金属污染聚类溯源</template>
+    <template v-slot:c-title>土壤作物相关分析</template>
     <template v-slot:c-intro>
       <p>
-        <strong>简介：</strong> 计算每种金属与管控制（环境标准值）的比值。用于划分污染风险和进行环境质量评估。
+        <strong>简介：</strong> 相关分析是定量描述和分析两个或多个变量观测值之间相关性程度的一种统计方法。相关性分析可以通过相关系数确定两变量的关系程度，若相关系数为正则说明两变量之间呈正相关关系，对应土壤和作物重金属含量之间表现为协同作用，相反，则呈负相关关系，对应土壤和作物重金属含量之间表现为拮抗作用。
         <br />
       </p>
       <div style="float: left;line-height: 1.8em;">
-        <strong>输入：</strong>
-      </div>
-      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
-        1. 武清区的采样点数据：位置信息、土壤金属含量。
-        <br />2. 武清区的土壤背景值。
+        <p>
+          <strong>输入：</strong>1. 采样点作物数据：包括pH、各种金属含量、经纬度等地理信息。2. 采样点土壤数据：包括pH、各种金属含量、经纬度等地理信息。
+        </p>
+        <p>
+          <strong>输出：</strong>相关系数分析结果表
+        </p>
       </div>
     </template>
     <div label="相关性矩阵" name="first">

@@ -3,15 +3,16 @@
     <template v-slot:c-title>防控监测</template>
     <template v-slot:c-intro>
       <p>
-        <strong>简介：</strong> 计算每种金属与管控制（环境标准值）的比值。用于划分污染风险和进行环境质量评估。
+        <strong>简介：</strong> 防控监测旨在在水稻生长关键期如插秧期、分蘖期、孕穗期、扬花期、灌浆期及防控措施实施的关键期均应进行监测，用来检验防控效果。其中，检查标准为土壤溶液重金属有效态浓度。
         <br />
       </p>
       <div style="float: left;line-height: 1.8em;">
-        <strong>输入：</strong>
-      </div>
-      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
-        1. 武清区的采样点数据：位置信息、土壤金属含量。
-        <br />2. 武清区的土壤背景值。
+        <p>
+          <strong>输入：</strong>1. 采样点数据：包括土壤溶液重金属有效态浓度、经纬度等地理信息。2. 各种标准数值。
+        </p>
+        <p>
+          <strong>输出：</strong>采样点防控效果信息地图，采样点防控效果情况统计图表和采样点防控效果详细信息。
+        </p>
       </div>
     </template>
 
@@ -28,7 +29,7 @@
         </el-tab-pane>
         <el-tab-pane label="图表" name="second">
           <div style="text-align: center;">
-            <h2 style="color: #606266">土壤重金属污染物样点超标情况</h2>
+            <h2 style="color: #606266">土壤重金属防控监测情况</h2>
             <el-table class="my-table" :data="outputData" style="margin:auto" stripe>
               <el-table-column prop="污染物" label="污染物" width="100" align="center"></el-table-column>
               <el-table-column prop="样点总数" label="样点总数" width="100"></el-table-column>
