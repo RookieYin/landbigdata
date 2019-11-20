@@ -17,27 +17,27 @@
     <template v-slot:upload-area>
       <el-row>
         <el-card class="my-card">
-          <div slot="header" class="clearfix">
+          <div slot="header" class="分裂节点评价准则">
             <span>参数选择</span>
           </div>
           <el-form :inline="true" :model="options" class="demo-form-inline">
             <el-row>
               <el-col :span="8">
-                <el-form-item label="gainFunction">
-                  <el-select v-model="options.gainFunction" placeholder="活动区域">
+                <el-form-item label="增益函数">
+                  <el-select v-model="options.gainFunction">
                     <el-option label="gini" value="gini"></el-option>
-                    <el-option label="mean" value="mean"></el-option>
+                    <el-option label="regression" value="mean"></el-option>
                   </el-select>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="maxDepth">
-                  <el-input v-model="options.maxDepth" placeholder="审批人"></el-input>
+                <el-form-item label="树最大深度">
+                  <el-input v-model="options.maxDepth"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="minNumSamples">
-                  <el-input v-model="options.minNumSamples" placeholder="审批人"></el-input>
+                <el-form-item label="叶子结点最小样本数">
+                  <el-input v-model="options.minNumSamples"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>

@@ -23,26 +23,26 @@
           <el-form :inline="true" :model="options" class="demo-form-inline">
             <el-row>
               <el-col :span="6">
-                <el-form-item label="seed">
-                  <el-input v-model="options.seed" placeholder="审批人"></el-input>
+                <el-form-item label="随机数种子">
+                  <el-input v-model="options.seed"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="6">
-                <el-form-item label="maxFeatures">
-                  <el-input v-model="options.maxFeatures" placeholder="审批人"></el-input>
+                <el-form-item label="分裂点使用特征数">
+                  <el-input v-model="options.maxFeatures"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="6">
-                <el-form-item label="replacement">
-                  <el-select v-model="options.replacement" placeholder="活动区域">
+                <el-form-item label="是否重复采样">
+                  <el-select v-model="options.replacement">
                     <el-option label="true" value="true"></el-option>
                     <el-option label="false" value="false"></el-option>
                   </el-select>
                 </el-form-item>
               </el-col>
               <el-col :span="6">
-                <el-form-item label="nEstimators">
-                  <el-input v-model="options.nEstimators" placeholder="审批人"></el-input>
+                <el-form-item label="评估器数量">
+                  <el-input v-model="options.nEstimators"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
