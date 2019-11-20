@@ -3,12 +3,16 @@
     <template v-slot:c-title>土壤多因子分析法</template>
     <template v-slot:c-intro>
       <p>
-        <strong>简介：</strong> 在单因子评价分析的基础上，利用公式，算出所有金属种类下的综合污染指数。
+        <strong>简介：</strong> 土壤多因子分析即综合污染指数法，也称内梅罗(Nemerow) 污染指数法，是根据单项污染指数法计算出的最大值和平均值，评价土壤综合超标或污染情况，以突出最高一项超标指数的作用。
       </p>
       <div style="float: left;line-height: 1.8em;">
-        <strong>输入：</strong>
+        <p>
+          <strong>输入：</strong>1. 采样点数据：包括pH、各种金属含量、经纬度等地理信息。2. 土壤背景值。
+        </p>
+        <p>
+          <strong>输出：</strong>采样点信息地图，采样点污染情况统计图表和采样点污染详细信息。
+        </p>
       </div>
-      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">每个采样点的位置信息和每个金属的单项污染指数。</div>
     </template>
     <div class="map">
       <el-tabs class="mytabs" type="border-card" style v-model="activeName">

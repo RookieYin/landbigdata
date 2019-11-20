@@ -3,15 +3,16 @@
     <template v-slot:c-title>重金属污染聚类溯源</template>
     <template v-slot:c-intro>
       <p>
-        <strong>简介：</strong> 计算每种金属与管控制（环境标准值）的比值。用于划分污染风险和进行环境质量评估。
+        <strong>简介：</strong> 污染溯源通过对采样的样本进行针对重金属的关联性分析，得到两两之间的关联性百分比集合，然后对集合其进行层次聚类。结合聚类结果与不同金属对于不同污染源的影响权重不同，从而对各种污染源进行带权分析，给出可能性的污染源。
         <br />
       </p>
       <div style="float: left;line-height: 1.8em;">
-        <strong>输入：</strong>
-      </div>
-      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
-        1. 武清区的采样点数据：位置信息、土壤金属含量。
-        <br />2. 武清区的土壤背景值。
+        <p>
+          <strong>输入：</strong>采样点作物数据：包括pH、各种金属含量、经纬度等地理信息。
+        </p>
+        <p>
+          <strong>输出：</strong>采样点重金属相关系数表和污染溯源信息。
+        </p>
       </div>
     </template>
 

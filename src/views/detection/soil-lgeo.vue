@@ -3,13 +3,17 @@
     <template v-slot:c-title>土壤地累计指数法</template>
     <template v-slot:c-intro>
       <p>
-        <strong>简介：</strong> 通过土壤重金属浓度与自然地球化学背景值之间的关系来确定重金属污染程度的一种方法。
+        <strong>简介：</strong> 地累积指数也被称为Muller指数。该指数不仅考虑地球化学背景值对重金属污染物的影响，而且能够评估人类活动的影响。
         <br />
       </p>
       <div style="float: left;line-height: 1.8em;">
-        <strong>输入：</strong>
+        <p>
+          <strong>输入：</strong>1. 采样点数据：包括pH、各种金属含量、经纬度等地理信息。2. 土壤背景值。
+        </p>
+        <p>
+          <strong>输出：</strong>采样点信息地图，采样点污染情况统计图表和采样点污染详细信息。
+        </p>
       </div>
-      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">自然地球化学背景值 与 采样点土壤重金属浓度。</div>
     </template>
     <div class="map">
       <el-tabs class="mytabs" type="border-card" style v-model="activeName">

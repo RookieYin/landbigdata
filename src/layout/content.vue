@@ -3,10 +3,10 @@
     <el-main>
       <el-row>
         <el-card class="my-card">
-          <div slot="header" class="clearfix">
+          <div slot="header" class="clearfix" style="color: #303133; font-weight:bold;">
             <slot name="c-title"></slot>
           </div>
-          <div style="margin-bottom: 10px;">
+          <div style="margin-bottom: 10px; color: #303133; line-height: 1.4em;">
             <slot name="c-intro">
               <p>
                 <strong>简介：</strong> 计算每种金属与管控制（环境标准值）的比值。用于划分污染风险和进行环境质量评估。
@@ -15,9 +15,9 @@
               <div style="float: left;line-height: 1.8em;">
                 <strong>输入：</strong>
               </div>
-              <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
+              <div style="float:left;">
                 1. 武清区的采样点数据：位置信息、土壤金属含量。
-                <br />2. 武清区的土壤背景值。
+                2. 武清区的土壤背景值。
               </div>
             </slot>
           </div>

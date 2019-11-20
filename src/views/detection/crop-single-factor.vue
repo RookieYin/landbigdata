@@ -1,17 +1,18 @@
 <template>
   <my-content @getInitData="getInitData">
-    <template v-slot:c-title>土壤单因子分析法</template>
+    <template v-slot:c-title>作物单因子分析法</template>
     <template v-slot:c-intro>
       <p>
-        <strong>简介：</strong> 计算每种金属与管控制（环境标准值）的比值。用于划分污染风险和进行环境质量评估。
+        <strong>简介：</strong> 作物单因子即作物重金属污染风险评价，选用作物污染指数(CPI) ，该方法原理与单因子污染指数方法类似，CPI为农作物样品中元素浓度与国家食品卫生标准中相应元素的国家标准值的比值。
         <br />
       </p>
       <div style="float: left;line-height: 1.8em;">
-        <strong>输入：</strong>
-      </div>
-      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
-        1. 武清区的采样点数据：位置信息、土壤金属含量。
-        <br />2. 武清区的土壤背景值。
+        <p>
+          <strong>输入：</strong>1. 采样点作物数据：包括pH、各种金属含量、经纬度等地理信息。2. 作物金属含量标准。
+        </p>
+        <p>
+          <strong>输出：</strong>采样点信息地图，采样点污染情况统计图表和采样点污染详细信息。
+        </p>
       </div>
     </template>
 
@@ -28,7 +29,7 @@
         </el-tab-pane>
         <el-tab-pane label="图表" name="second">
           <div style="text-align: center;">
-            <h2 style="color: #606266">土壤重金属污染物样点超标情况</h2>
+            <h2 style="color: #606266">作物重金属污染物样点超标情况</h2>
             <el-table class="my-table" :data="outputData" style="margin:auto" stripe>
               <el-table-column prop="污染物" label="污染物" width="100" align="center"></el-table-column>
               <el-table-column prop="样点总数" label="样点总数" width="100"></el-table-column>

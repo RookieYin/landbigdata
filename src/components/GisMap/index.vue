@@ -91,7 +91,7 @@ export default {
       metalOptions: [],
       mapMethodData: [
         { label: "显示全图", onclick: this.showFull },
-        { label: "显示污染影像图", onclick: this.showHeatMap }
+        { label: "显示污染影响图", onclick: this.showHeatMap }
       ],
       layerData: [
         {
