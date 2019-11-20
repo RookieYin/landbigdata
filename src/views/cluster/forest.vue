@@ -3,15 +3,16 @@
     <template v-slot:c-title>随机森林分析</template>
     <template v-slot:c-intro>
       <p>
-        <strong>简介：</strong> 计算每种金属与管控制（环境标准值）的比值。用于划分污染风险和进行环境质量评估。
+        <strong>简介：</strong> 在机器学习中，随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别树输出的类别的众数而定。 Leo Breiman和Adele Cutler发展出推论出随机森林的演算法。这个术语是1995年由贝尔实验室的Tin Kam Ho所提出的随机决策森林而来的。
         <br />
       </p>
       <div style="float: left;line-height: 1.8em;">
-        <strong>输入：</strong>
-      </div>
-      <div style="float:left;margin-bottom: 20px;line-height: 1.8em;">
-        1. 武清区的采样点数据：位置信息、土壤金属含量。
-        <br />2. 武清区的土壤背景值。
+        <p>
+          <strong>输入：</strong>1. 用于训练模型的一组数据，包含各种土壤信息和土壤上植物的金属含量。2. 用于预测的一组真实数据。3. 决策树模型参数。
+        </p>
+        <p>
+          <strong>输出：</strong>对于真实数据的预测详情和地图可视化。
+        </p>
       </div>
     </template>
     <template v-slot:upload-area>
@@ -93,7 +94,7 @@ import MyContent from "@/layout/content.vue";
 import GisMap from "@/components/GisMap/index.vue";
 import SearchTable from "@/components/SearchTable/index.vue";
 import ExcelUpload from "@/components/ExcelUpload/upload-excel";
-import { RandomForestClassifier as RFClassifier } from 'ml-random-forest';
+import { RandomForestClassifier as RFClassifier } from "ml-random-forest";
 
 export default {
   data: function() {
@@ -106,16 +107,13 @@ export default {
         seed: 3,
         maxFeatures: 0.8,
         replacement: true,
-        nEstimators: 25,
+        nEstimators: 25
       },
       mapData: [],
-      classes: [
-        ["green", "无污染"],
-        ["blue", "有污染"],
-      ],
+      classes: [["green", "无污染"], ["blue", "有污染"]],
       tableData: [],
       headerData: [],
-      isUpdateTrain: false,
+      isUpdateTrain: false
     };
   },
   components: {
@@ -132,9 +130,9 @@ export default {
       console.log(data);
       let trainX = [];
       let trainY = [];
-      for(let item of data.tableData){
+      for (let item of data.tableData) {
         let temp = [];
-        for(let m of this.metals){
+        for (let m of this.metals) {
           temp.push(item["T_" + m]);
         }
         temp.push(item.pH);
@@ -145,11 +143,11 @@ export default {
       console.log(trainY);
       let classifier = new RFClassifier(this.options);
       classifier.train(trainX, trainY);
-      console.log('训练完成');
+      console.log("训练完成");
       this.classifier = classifier;
       this.isUpdateTrain = true;
     },
-    getPredictData(data){
+    getPredictData(data) {
       // if(!this.isUpdateTrain){
       //   alert("请先上传训练数据！");
       //   return;
@@ -157,9 +155,9 @@ export default {
       console.log(data);
       let predictX = [];
       let predictData = [];
-      for(let item of data.tableData){
+      for (let item of data.tableData) {
         let temp = [];
-        for(let m of this.metals){
+        for (let m of this.metals) {
           temp.push(item["T_" + m]);
         }
         temp.push(item.pH);
@@ -200,7 +198,7 @@ export default {
         data.push([
           predictData[i]["longitude"],
           predictData[i]["latitude"],
-          predictY[i]%2,
+          predictY[i] % 2,
           htmlStr
         ]);
         tableData.push(tableRow);
