@@ -1,6 +1,6 @@
 <template>
   <my-content @getInitData="getInitData">
-    <template v-slot:c-title>土壤多因子分析法</template>
+    <template v-slot:c-title>土壤综合质量影响指数分析</template>
     <template v-slot:c-intro>
       <p>
         <strong>简介：</strong> 土壤和农产品综合指数法可以解决在土壤-农产品复合污染影响评价中无法兼顾土壤和农产品的问题，将土壤和农产品品质较好的联系起来，推进了农田土壤和作物系统重金属复合影响评价的量化进程。农田(或耕地)土壤重金属复合影响中的综合质量影响指数由土壤综合质量影响指数和农作物综合质量影响指数组成。

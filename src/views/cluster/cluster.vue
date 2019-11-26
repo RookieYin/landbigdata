@@ -8,7 +8,7 @@
       </p>
       <div style="float: left;line-height: 1.8em;">
         <p>
-          <strong>输入：</strong>采样点作物数据：包括pH、各种金属含量、经纬度等地理信息。
+          <strong>输入：</strong>采样点土壤数据：包括pH、各种金属含量、经纬度等地理信息。
         </p>
         <p>
           <strong>输出：</strong>采样点重金属相关系数表和污染溯源信息。
